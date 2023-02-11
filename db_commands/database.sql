@@ -1,9 +1,10 @@
 
 # table for user
 create table user (
-	id int not null primary key auto_increment,
-    name varchar(100) not null,
-    email varchar(100) not null
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    creation_date DATE NOT NULL
 );
 
 
