@@ -2,9 +2,12 @@ import express from "express";
 
 const app = express();
 
-app.use(indexRoutes);
-app.use(employeesRoutes);
+app.use(express.json());
 
-app.listen(3000);
+app.use((req, res, next) => {
+    res.status(404).json({
+        message: 'Not Found =('
+    })
+})
 
-console.log("Running");
+export default app;
