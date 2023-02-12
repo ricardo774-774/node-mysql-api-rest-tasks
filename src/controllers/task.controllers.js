@@ -1,4 +1,9 @@
 import { pool } from "../db.js";
+import { 
+    notFound,
+    notUpdated,
+    notRemoved
+} from "../validations/task.validations.js";
 
 const dbInaccessible =  'Something goes wrong';
 
@@ -27,6 +32,9 @@ export const getTask = async (req, res) => {
             `SELECT * FROM task WHERE id = ?`, 
             [id]
         );
+
+        // validation to know if the id task exists
+        notFound(res, rows);
         res.send(rows[0]);
     } catch (err) {
         return res.status(500).json({
@@ -125,6 +133,8 @@ export const updateTask = async(req, res) => {
                 id
             ]
         );
+        // validation to know if the id task exists
+        notUpdated(res, result);
     } catch (err) {
         return res.status(500).json({
             message: dbInaccessible
@@ -139,6 +149,8 @@ export const deleteTask = async (req, res) => {
             `DELETE FROM task WHERE id = ?`,
             [id]
         );
+        // validation to know if the id task exists
+        notRemoved(res, result);
     } catch (error) {
         return res.status(500).json({
             message: dbInaccessible
