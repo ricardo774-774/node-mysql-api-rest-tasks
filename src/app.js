@@ -6,8 +6,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use(userRoutes);
-app.use(taskRoutes);
+app.use('/api', userRoutes);
+app.use('/api', taskRoutes);
 
 app.use((req, res, next) => {
     res.status(404).json({
